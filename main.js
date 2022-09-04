@@ -37,18 +37,18 @@ class Blockchain {
     this.chain.push(newBlock);
   }
 
-  isChainValid(){
-    for(let i = 1; i < this.chain.length; i++){
-        const currentBlock = this.chain[i];
-        const previousBlock = this.chain[i -1];
+  isChainValid() {
+    for (let i = 1; i < this.chain.length; i++) {
+      const currentBlock = this.chain[i];
+      const previousBlock = this.chain[i - 1];
 
-        if(currentBlock.hash !== currentBlock.calculateHash()){
-            return false;
-        }
+      if (currentBlock.hash !== currentBlock.calculateHash()) {
+        return false;
+      }
 
-        if(currentBlock.previousHash !== previousBlock.hash){
-            return false;
-        }
+      if (currentBlock.previousHash !== previousBlock.hash) {
+        return false;
+      }
     }
 
     return true;
@@ -56,9 +56,14 @@ class Blockchain {
 }
 
 let longsCoin = new Blockchain();
-longsCoin.addBlock(new Block(1, "03/03/2022", {amount: 4}));
-longsCoin.addBlock(new Block(2, "04/12/2019", {amount: 50}));
+longsCoin.addBlock(new Block(1, "03/03/2022", { amount: 4 }));
+longsCoin.addBlock(new Block(2, "04/12/2019", { amount: 50 }));
 
 //console.log(JSON.stringify(longsCoin, null, 4));
 
-console.log("Is blockchain valid?", longsCoin.isChainValid())
+console.log("Is blockchain valid?", longsCoin.isChainValid());
+
+//making a fraudulent change to the blockchain
+longsCoin.chain[1].data = { amount: 99 };
+
+console.log("Is blockchain valid?", longsCoin.isChainValid());
