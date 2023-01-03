@@ -66,4 +66,5 @@ console.log("Is blockchain valid?", longsCoin.isChainValid());
 //making a fraudulent change to the blockchain
 longsCoin.chain[1].data = { amount: 99 };
 
+// checking validity 
 console.log("Is blockchain valid?", longsCoin.isChainValid());
